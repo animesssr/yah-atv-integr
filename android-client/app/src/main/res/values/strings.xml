@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Yandex Smart TV</string>
+    <string name="status_connecting">Подключение к серверу...</string>
+    <string name="status_connected">Подключено. Код сопряжения:</string>
+    <string name="status_error">Ошибка подключения</string>
+    <string name="status_paired">Устройство успешно привязано к Яндексу!</string>
+</resources>
