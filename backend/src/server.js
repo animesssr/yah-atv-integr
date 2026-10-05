@@ -31,6 +31,7 @@ app.use((req, res, next) => {
 app.use('/oauth', oauthRoutes);
 // Yandex health check ping (unauthenticated)
 app.get('/v1.0/ping', (req, res) => res.status(200).send('OK'));
+app.head('/v1.0/', (req, res) => res.status(200).send());
 
 app.use('/v1.0', yandexRoutes);
 

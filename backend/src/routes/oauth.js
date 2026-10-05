@@ -99,7 +99,7 @@ router.post('/token', (req, res) => {
     return res.json({
         access_token: accessToken,
         refresh_token: refreshToken,
-        token_type: 'Bearer',
+        token_type: 'bearer',
         expires_in: expiresIn
     });
 
@@ -127,7 +127,7 @@ router.post('/token', (req, res) => {
     return res.json({
         access_token: newAccessToken,
         refresh_token: newRefreshToken,
-        token_type: 'Bearer',
+        token_type: 'bearer',
         expires_in: expiresIn
     });
   }

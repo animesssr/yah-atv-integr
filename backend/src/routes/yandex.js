@@ -41,7 +41,7 @@ router.get('/user/devices', (req, res) => {
             {
                 type: 'devices.capabilities.on_off',
                 retrievable: false,
-                reportable: false // Can't easily retrieve state if offline, so assume false
+                reportable: false
             },
             {
                 type: 'devices.capabilities.range',
@@ -63,6 +63,19 @@ router.get('/user/devices', (req, res) => {
                 reportable: false,
                 parameters: {
                     instance: 'pause'
+                }
+            },
+            {
+                type: 'devices.capabilities.mode',
+                retrievable: false,
+                reportable: false,
+                parameters: {
+                    instance: 'input_source',
+                    modes: [
+                        { value: 'one' },
+                        { value: 'two' },
+                        { value: 'three' }
+                    ]
                 }
             }
         ]
