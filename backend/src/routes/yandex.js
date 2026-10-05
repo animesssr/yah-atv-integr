@@ -29,16 +29,24 @@ router.get('/user/devices', (req, res) => {
         id: device.id,
         name: device.name || 'Телевизор',
         description: 'Android TV',
-        room: 'Зал',
+        // room: 'Зал', // Optional, better left out so user can assign it
         type: 'devices.types.media_device.tv',
+        device_info: {
+            manufacturer: 'Custom',
+            model: 'Android TV WebSocket',
+            hw_version: '1.0',
+            sw_version: '1.0'
+        },
         capabilities: [
             {
                 type: 'devices.capabilities.on_off',
-                retrievable: false // Can't easily retrieve state if offline, so assume false
+                retrievable: false,
+                reportable: false // Can't easily retrieve state if offline, so assume false
             },
             {
                 type: 'devices.capabilities.range',
                 retrievable: false,
+                reportable: false,
                 parameters: {
                     instance: 'volume',
                     random_access: true,
@@ -52,6 +60,7 @@ router.get('/user/devices', (req, res) => {
             {
                 type: 'devices.capabilities.toggle',
                 retrievable: false,
+                reportable: false,
                 parameters: {
                     instance: 'pause'
                 }
@@ -59,12 +68,13 @@ router.get('/user/devices', (req, res) => {
             {
                 type: 'devices.capabilities.mode',
                 retrievable: false,
+                reportable: false,
                 parameters: {
                     instance: 'input_source',
                     modes: [
-                        { value: 'one', name: 'YouTube' },
-                        { value: 'two', name: 'Кинопоиск' },
-                        { value: 'three', name: 'VPN' }
+                        { value: 'one' },
+                        { value: 'two' },
+                        { value: 'three' }
                     ]
                 }
             }
@@ -92,15 +102,7 @@ router.post('/user/devices/query', (req, res) => {
 
         return {
             id: d.id,
-            capabilities: [
-                {
-                    type: 'devices.capabilities.on_off',
-                    state: {
-                        instance: 'on',
-                        value: isOnline // Just an approximation
-                    }
-                }
-            ]
+            capabilities: []
         };
     });
 

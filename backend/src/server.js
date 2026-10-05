@@ -29,13 +29,13 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/oauth', oauthRoutes);
+// Yandex health check ping (unauthenticated)
+app.get('/v1.0/ping', (req, res) => res.status(200).send('OK'));
+
 app.use('/v1.0', yandexRoutes);
 
 // Health check endpoint
 app.get('/ping', (req, res) => res.send('pong'));
-
-// Yandex endpoint verification ping
-app.head('/v1.0/', (req, res) => res.status(200).send(''));
 
 // Setup WebSocket
 setupWebSocket(server);
