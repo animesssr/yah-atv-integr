@@ -58,7 +58,16 @@ router.post('/authorize', (req, res) => {
 
 // 3. Token endpoint (Yandex exchanges the auth code for access/refresh tokens)
 router.post('/token', (req, res) => {
-  const { grant_type, code, client_id, client_secret, refresh_token } = req.body;
+  let { grant_type, code, client_id, client_secret, refresh_token } = req.body;
+
+  // Support for HTTP Basic Auth (Yandex sends credentials in header by default)
+  const authHeader = req.headers.authorization;
+  if (!client_id && !client_secret && authHeader && authHeader.startsWith('Basic ')) {
+    const b64auth = authHeader.split(' ')[1] || '';
+    const [login, password] = Buffer.from(b64auth, 'base64').toString().split(':');
+    client_id = login;
+    client_secret = password;
+  }
 
   if (client_id !== config.OAUTH_CLIENT_ID || client_secret !== config.OAUTH_CLIENT_SECRET) {
     return res.status(401).json({ error: 'invalid_client' });
