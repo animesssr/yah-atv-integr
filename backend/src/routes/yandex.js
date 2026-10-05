@@ -65,19 +65,7 @@ router.get('/user/devices', (req, res) => {
                     instance: 'pause'
                 }
             },
-            {
-                type: 'devices.capabilities.mode',
-                retrievable: false,
-                reportable: false,
-                parameters: {
-                    instance: 'input_source',
-                    modes: [
-                        { value: 'one' },
-                        { value: 'two' },
-                        { value: 'three' }
-                    ]
-                }
-            }
+            // Removed input_source as custom values are not supported by Yandex schema
         ]
     };
 
